@@ -47,13 +47,15 @@ def pars():
     doc = docx.Document("E:\PyCharmProject\TgBot\library\docks\File.docx")
 
     paragraphs1 = ''
-    for i in range(0,4):
+    for i in range(0,3):
         paragraphs1 = paragraphs1 + doc.paragraphs[i].text
 
 
     #Подключени к бд
     conn = bd.connect_bd()
 
+    query = ("""DELETE FROM timetable""")
+    bd.update_bd(query, conn)
 
 
     id = 0
@@ -72,10 +74,10 @@ def pars():
                 teacher = table.cell(i, 3)
                 num_class = table.cell(i, 4)
 
-                query = """INSERT INTO timetable (id, name_group, pair_number, subject, teacher_fullname, room_number,date) 
-                            VALUES 
-                                ({0},'{1}','{2}','{3}','{4}','{5}', '{6}')
-                             """.format(id,section.text,num_lesson.text,subject.text,teacher.text, num_class.text, paragraphs1)
+                query = ("""INSERT INTO timetable (id, name_group, pair_number, subject, teacher_fullname, room_number, date) 
+	                            VALUES 
+		                            ({0},'{1}','{2}', '{3}', '{4}', '{5}', '{6}')
+                             """).format(id,section.text,num_lesson.text,subject.text,teacher.text, num_class.text, paragraphs1)
                 bd.update_bd(query,conn)
 
             except:
