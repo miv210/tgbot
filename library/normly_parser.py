@@ -47,7 +47,7 @@ def pars():
     doc = docx.Document("E:\PyCharmProject\TgBot\library\docks\File.docx")
 
     paragraphs1 = ''
-    for i in range(0,3):
+    for i in range(0,2):
         paragraphs1 = paragraphs1 + doc.paragraphs[i].text
 
 
